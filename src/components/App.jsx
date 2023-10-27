@@ -15,7 +15,7 @@ export const App = () => {
     const alreadyExist = contacts?.some(
       el => el.name.toLowerCase() === formData.name.toLowerCase()
     );
-    console.log(alreadyExist);
+
     if (alreadyExist) return alert(`${formData.name} is already in contacts.`);
     dispatch(addContactRedux(formData));
   };
