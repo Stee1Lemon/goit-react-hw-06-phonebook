@@ -12,10 +12,10 @@ export const App = () => {
   const filter = useSelector(state => state.filter);
 
   const addContact = formData => {
-    const alreadyExist = contacts.some(
+    const alreadyExist = contacts?.some(
       el => el.name.toLowerCase() === formData.name.toLowerCase()
     );
-
+    console.log(alreadyExist);
     if (alreadyExist) return alert(`${formData.name} is already in contacts.`);
     dispatch(addContactRedux(formData));
   };
