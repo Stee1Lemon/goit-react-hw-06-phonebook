@@ -1,13 +1,22 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContactRedux } from 'redux/contactsSlice';
 
-export const ContactForm = ({ addContact }) => {
+export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts);
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    addContact({ name, number });
+    const alreadyExist = contacts?.some(
+      el => el.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (alreadyExist) return alert(`${name} is already in contacts.`);
+    dispatch(addContactRedux({ name, number }));
     setName('');
     setNumber('');
   };
